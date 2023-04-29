@@ -18,6 +18,10 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  config.mongoose = {
+    url: 'mongodb://laixiaoyi:mongodb123@127.0.0.1:27017/ycfe-cli',
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

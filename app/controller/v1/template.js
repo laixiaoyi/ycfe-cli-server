@@ -2,36 +2,33 @@
 
 const { Controller } = require('egg');
 
-const ADD_TEMPLATE = [
-  {
-    name: 'vue2项目模板',
-    value: 'template-vue2',
-    npmName: '@ycfe-cli/template-vue2',
-    version: '1.0.0',
-  }, {
-    name: 'vue3项目模板',
-    value: 'template-vue3',
-    npmName: '@ycfe-cli/template-vue3',
-    version: '1.0.0',
-  },
-];
-
 class TemplateController extends Controller {
   // 项目模板查询
   async index() {
     const { ctx } = this;
-    ctx.body = ADD_TEMPLATE;
+    const res = await ctx.model.Template.find({});
+    ctx.body = res;
   }
 
-  // 项目模板单条查询
+  // 项目模板详情查询
   async show() {
     const { ctx } = this;
-    ctx.body = 'RESTful API show';
+    const id = ctx.params.id;
+    const res = await ctx.model.Template.find({ value: id });
+    if (res.length > 0) {
+      ctx.body = res[0];
+    } else {
+      ctx.body = {};
+    }
   }
 
   // 项目模板新增
   async create() {
     const { ctx } = this;
+    ctx.model.Template.create({
+      name: 'name',
+      value: 'value',
+    });
     ctx.body = 'RESTful API create';
   }
 
